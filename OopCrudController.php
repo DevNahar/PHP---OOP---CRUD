@@ -1,6 +1,6 @@
 <?php
 
-class CommonCrudController {
+class OopCrudController {
 
     private $mysqli = '';
     private $result = [];
@@ -9,7 +9,7 @@ class CommonCrudController {
     public function __construct()
     {
         if (!$this->conn) {
-			$this->mysqli = new mysqli('localhost', 'root', '', 'portfolio_db');
+			$this->mysqli = new mysqli('localhost', 'root', '', 'phpoopcrud');
 
 			if ($this->mysqli->connect_error) {
 				return false;
@@ -29,9 +29,7 @@ class CommonCrudController {
 		} else {
 			$sql = "SELECT $selectedField FROM $table_name";
 		}
-		// echo $sql;
-		// die();
-
+		
 		if ($this->mysqli->query($sql)) {
 			$selectResult = $this->mysqli->query($sql);
 
@@ -108,12 +106,12 @@ class CommonCrudController {
 
     public function __destruct()
     {
-        if ($this->conn) { //True = has conncection
+        if ($this->conn) { 
             if ($this->mysqli->close()) {
                 $this->conn = false;
                 return true;
             }
-        } else { //False = has no conncection
+        } else { 
             return false;
         }
     }
